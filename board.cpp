@@ -18,10 +18,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include <iostream>
-
 #include "board.h"
 
-int main() {
-  return 0;
+Board::Board(int number_of_squares) :
+    number_of_squares(number_of_squares),
+    squares(new square_t[number_of_squares]) {
+}
+
+Board::~Board() {
+  delete squares;
 }

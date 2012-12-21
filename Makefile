@@ -20,11 +20,14 @@
 
 all: search
 
-search: search.o
-	g++ search.o -o search
+board.o: board.cpp
+	g++ -c board.cpp
 
 search.o: search.cpp
 	g++ -c search.cpp
 
+search: board.o search.o
+	g++ board.o search.o -o search
+
 clean: 
-	rm search.o search
+	rm *.o search

@@ -18,10 +18,19 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include <iostream>
+#ifndef _BOARD_H_
+#define _BOARD_H_
 
-#include "board.h"
+typedef int square_t;
 
-int main() {
-  return 0;
-}
+class Board {
+ public:
+  Board(int number_of_squares);
+  ~Board();
+
+ private:
+  int number_of_squares;
+  square_t* squares;
+};
+
+#endif  // _BOARD_H_
