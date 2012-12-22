@@ -26,7 +26,7 @@
 class State;
 class StateList;
 
-typedef State* Square;
+typedef const State* Square;
 
 extern const State* EMPTY;
 

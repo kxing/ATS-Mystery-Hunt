@@ -32,7 +32,7 @@ Board::Board(int number_of_squares,
              bool (*validator)(Board*)) :
     number_of_squares(number_of_squares),
     state_list(state_list),
-    squares(new State*[number_of_squares]),
+    squares(new Square[number_of_squares]),
     validator(validator) {
   memset(squares, 0, sizeof(squares));
 }
@@ -60,7 +60,7 @@ Board* Board::find_solution_internal(int index) {
   }
 
   for (int i = 0; i <= state_list->get_number_of_states(); i++) {
-    set_value(index, const_cast<Square>(state_list->get_state(i)));
+    set_value(index, state_list->get_state(i));
 
     if (!validator(this)) {
       // Stop if the current state is impossible.
