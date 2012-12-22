@@ -21,6 +21,7 @@
 #include "board.h"
 
 #include <stddef.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "state.h"
@@ -56,6 +57,17 @@ Board* Board::find_solution() const {
     delete board;
     return NULL;
   }
+}
+
+void Board::pretty_print() const {
+  for (int i = 0; i < number_of_squares; i++) {
+    if (i == 0) {
+      printf("%s", squares[i]->get_pretty_print_string());
+    } else {
+      printf(" %s", squares[i]->get_pretty_print_string());
+    }
+  }
+  printf("\n");
 }
 
 Board* Board::copy() const {

@@ -24,8 +24,8 @@
 #include "state.h"
 #include "state_list.h"
 
-const int number_of_squares = 5;
-const int number_of_states = 5;
+const int NUMBER_OF_SQUARES = 5;
+const int NUMBER_OF_STATES = 5;
 
 const State RED("red");
 const State BLUE("blue");
@@ -41,16 +41,16 @@ const State* STATES[5] = {
   &BLACK,
 };
 
-const StateList STATE_LIST(STATES, 5);
+const StateList STATE_LIST(STATES, NUMBER_OF_STATES);
 
 bool validator(Board* b) {
   // Tests for distinct numbers.
-  for (int i = 0; i < number_of_squares; i++) {
+  for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
     if (b->get_value(i) == EMPTY) {
       continue;
     }
 
-    for (int j = i + 1; j < number_of_squares; j++) {
+    for (int j = i + 1; j < NUMBER_OF_SQUARES; j++) {
       if (b->get_value(j) == EMPTY) {
         continue;
       }
@@ -64,7 +64,7 @@ bool validator(Board* b) {
 }
 
 int main() {
-  Board b(number_of_squares, &STATE_LIST, &validator);
+  Board b(NUMBER_OF_SQUARES, &STATE_LIST, &validator);
   Board* solution = b.find_solution();
 
   if (solution == NULL) {
@@ -72,10 +72,7 @@ int main() {
     printf("No solution found\n");
   } else {
     // Found a solution.
-    for (int i = 0; i < number_of_squares; i++) {
-      printf("%p ", solution->get_value(i));
-    }
-    printf("\n");
+    solution->pretty_print();
     delete solution;
   }
   return 0;

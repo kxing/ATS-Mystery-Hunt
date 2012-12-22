@@ -50,6 +50,9 @@ class Board {
   // The caller is responsible for freeing the pointer, if it is non-NULL.
   Board* find_solution() const;
 
+  // Prints the board.
+  void pretty_print() const;
+
  private:
   const int number_of_squares;
   const StateList* const state_list;
