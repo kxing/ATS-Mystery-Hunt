@@ -26,6 +26,10 @@ class State {
   State(const char* pretty_print_string);
   ~State();
 
+  const char* get_pretty_print_string() const {
+    return pretty_print_string;
+  }
+
  private:
   const char* pretty_print_string;
 };

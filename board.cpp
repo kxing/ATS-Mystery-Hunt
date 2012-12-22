@@ -23,9 +23,11 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "state.h"
 #include "state_list.h"
 
-const State* EMPTY = 0;
+const State EMPTY_STATE("empty");
+const State* EMPTY = &EMPTY_STATE;
 
 Board::Board(const int number_of_squares,
              const StateList* state_list,
@@ -34,7 +36,10 @@ Board::Board(const int number_of_squares,
     state_list(state_list),
     squares(new Square[number_of_squares]),
     validator(validator) {
-  memset(squares, 0, sizeof(squares));
+  // Initialize the square to |EMPTY|.
+  for (int i = 0; i < number_of_squares; i++) {
+    squares[i] = EMPTY;
+  }
 }
 
 Board::~Board() {
