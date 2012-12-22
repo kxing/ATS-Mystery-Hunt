@@ -20,7 +20,7 @@
 
 #include "state_list.h"
 
-StateList::StateList(State** states, int number_of_states) :
+StateList::StateList(const State** states, int number_of_states) :
     states(states), number_of_states(number_of_states) {
 }
 

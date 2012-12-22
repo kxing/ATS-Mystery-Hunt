@@ -23,12 +23,16 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "state_list.h"
+
+const State* EMPTY = 0;
+
 Board::Board(int number_of_squares,
-             int number_of_states,
+             const StateList* state_list,
              bool (*validator)(Board*)) :
     number_of_squares(number_of_squares),
-    number_of_states(number_of_states),
-    squares(new square_t[number_of_squares]),
+    state_list(state_list),
+    squares(new State*[number_of_squares]),
     validator(validator) {
   memset(squares, 0, sizeof(squares));
 }
@@ -42,7 +46,7 @@ Board* Board::find_solution() {
 }
 
 Board* Board::copy() {
-  Board* board = new Board(number_of_squares, number_of_states, validator);
+  Board* board = new Board(number_of_squares, state_list, validator);
   for (int i = 0; i < number_of_squares; i++) {
     board->set_value(i, get_value(i));
   }
@@ -55,8 +59,8 @@ Board* Board::find_solution_internal(int index) {
     return copy();
   }
 
-  for (int i = 1; i <= number_of_states; i++) {
-    set_value(index, i);
+  for (int i = 0; i <= state_list->get_number_of_states(); i++) {
+    set_value(index, state_list->get_state(i));
 
     if (!validator(this)) {
       // Stop if the current state is impossible.

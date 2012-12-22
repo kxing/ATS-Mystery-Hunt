@@ -25,19 +25,19 @@ class State;
 
 class StateList {
  public:
-  StateList(State** states, int number_of_states);
+  StateList(const State** states, int number_of_states);
   ~StateList();
 
   int get_number_of_states() const {
     return number_of_states;
   }
 
-  State* get_state(int index) const {
+  const State* get_state(int index) const {
     return states[index];
   }
 
  private:
-  State** states;
+  const State** states;
   int number_of_states;
 };
 

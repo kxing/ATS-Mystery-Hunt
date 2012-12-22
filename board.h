@@ -25,24 +25,24 @@
 
 typedef int square_t;
 
-const square_t EMPTY = 0;
+class State;
+class StateList;
+
+extern const State* EMPTY;
 
 class Board {
  public:
-  // The states of the board must be from 1 to |number_of_states| inclusive.
-  Board(int number_of_squares, int number_of_states, bool (*validator)(Board*));
+  Board(int number_of_squares,
+        const StateList* state_list,
+        bool (*validator)(Board*));
   ~Board();
 
-  square_t get_value(int index) {
-    assert(0 <= squares[index]);
-    assert(squares[index] <= number_of_states);
+  State* get_value(int index) {
     return squares[index];
   }
 
-  void set_value(int index, square_t value) {
-    assert(0 <= value);
-    assert(value <= number_of_states);
-    squares[index] = value;
+  void set_value(int index, const State* value) {
+    squares[index] = const_cast<State*>(value);
   }
 
   // Returns a board containing the solution, if it exists.
@@ -52,8 +52,10 @@ class Board {
 
  private:
   int number_of_squares;
-  int number_of_states;
-  square_t* squares;
+  const StateList* state_list;
+
+  // Array of State* pointers, with length |number_of_squares|.
+  State** squares;
 
   bool (*validator)(Board*);
 

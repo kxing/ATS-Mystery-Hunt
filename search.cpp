@@ -21,9 +21,27 @@
 #include <stdio.h>
 
 #include "board.h"
+#include "state.h"
+#include "state_list.h"
 
 const int number_of_squares = 5;
 const int number_of_states = 5;
+
+const State RED;
+const State BLUE;
+const State YELLOW;
+const State GREEN;
+const State BLACK;
+
+const State* STATES[5] = {
+  &RED,
+  &BLUE,
+  &YELLOW,
+  &GREEN,
+  &BLACK,
+};
+
+const StateList STATE_LIST(STATES, 5);
 
 bool validator(Board* b) {
   // Tests for distinct numbers.
@@ -46,7 +64,7 @@ bool validator(Board* b) {
 }
 
 int main() {
-  Board b(number_of_squares, number_of_states, &validator);
+  Board b(number_of_squares, &STATE_LIST, &validator);
   Board* solution = b.find_solution();
 
   if (solution == NULL) {
@@ -55,7 +73,7 @@ int main() {
   } else {
     // Found a solution.
     for (int i = 0; i < number_of_squares; i++) {
-      printf("%d ", solution->get_value(i));
+      printf("%p ", solution->get_value(i));
     }
     printf("\n");
     delete solution;
