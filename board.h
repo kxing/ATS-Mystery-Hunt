@@ -30,7 +30,7 @@ const square_t EMPTY = 0;
 class Board {
  public:
   // The states of the board must be from 1 to |number_of_states| inclusive.
-  Board(int number_of_squares, int number_of_states);
+  Board(int number_of_squares, int number_of_states, bool (*validator)(Board*));
   ~Board();
 
   square_t get_value(int index) {
@@ -48,12 +48,14 @@ class Board {
   // Returns a board containing the solution, if it exists.
   // Returns NULL if there is no solution.
   // The caller is responsible for freeing the pointer, if it is non-NULL.
-  Board* find_solution(bool (*validator)(Board*));
+  Board* find_solution();
 
  private:
   int number_of_squares;
   int number_of_states;
   square_t* squares;
+
+  bool (*validator)(Board*);
 
   // Returns a copy of the board. The caller is responsible for freeing the
   // memory allocated.
@@ -62,7 +64,7 @@ class Board {
   // Returns a board containing the solution, if it exists.
   // Returns NULL if there is no solution.
   // The caller is responsible for freeing the pointer, if it is non-NULL.
-  Board* find_solution_internal(bool (*validator)(Board*), int index);
+  Board* find_solution_internal(int index);
 };
 
 #endif  // _BOARD_H_

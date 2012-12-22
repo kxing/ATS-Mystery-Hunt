@@ -46,8 +46,8 @@ bool validator(Board* b) {
 }
 
 int main() {
-  Board b(number_of_squares, number_of_states);
-  Board* solution = b.find_solution(&validator);
+  Board b(number_of_squares, number_of_states, &validator);
+  Board* solution = b.find_solution();
 
   if (solution == NULL) {
     // Found no solution.
