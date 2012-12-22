@@ -21,16 +21,48 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include <assert.h>
+
 typedef int square_t;
+
+const square_t EMPTY = 0;
 
 class Board {
  public:
-  Board(int number_of_squares);
+  // The states of the board must be from 1 to |number_of_states| inclusive.
+  Board(int number_of_squares, int number_of_states);
   ~Board();
+
+  square_t get_value(int index) {
+    assert(0 <= squares[index]);
+    assert(squares[index] <= number_of_states);
+    return squares[index];
+  }
+
+  void set_value(int index, square_t value) {
+    assert(0 <= value);
+    assert(value <= number_of_states);
+    squares[index] = value;
+  }
+
+  // Returns a board containing the solution, if it exists.
+  // Returns NULL if there is no solution.
+  // The caller is responsible for freeing the pointer, if it is non-NULL.
+  Board* find_solution(bool (*validator)(Board*));
 
  private:
   int number_of_squares;
+  int number_of_states;
   square_t* squares;
+
+  // Returns a copy of the board. The caller is responsible for freeing the
+  // memory allocated.
+  Board* copy();
+
+  // Returns a board containing the solution, if it exists.
+  // Returns NULL if there is no solution.
+  // The caller is responsible for freeing the pointer, if it is non-NULL.
+  Board* find_solution_internal(bool (*validator)(Board*), int index);
 };
 
 #endif  // _BOARD_H_

@@ -18,10 +18,28 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include <iostream>
+#include <stdio.h>
 
 #include "board.h"
 
+bool validator(Board* b) {
+  return true;
+}
+
 int main() {
+  const int number_of_squares = 5;
+  const int number_of_states = 7;
+
+  Board b(number_of_squares, number_of_states);
+  Board* solution = b.find_solution(&validator);
+
+  if (solution == NULL) {
+    printf("No solution found\n");
+  }
+  for (int i = 0; i < number_of_squares; i++) {
+    printf("%d ", solution->get_value(i));
+  }
+  printf("\n");
+  delete solution;
   return 0;
 }

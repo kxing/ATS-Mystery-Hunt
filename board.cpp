@@ -20,11 +20,44 @@
 
 #include "board.h"
 
-Board::Board(int number_of_squares) :
+#include <stddef.h>
+#include <string.h>
+
+Board::Board(int number_of_squares, int number_of_states) :
     number_of_squares(number_of_squares),
+    number_of_states(number_of_states),
     squares(new square_t[number_of_squares]) {
+  memset(squares, 0, sizeof(squares));
 }
 
 Board::~Board() {
   delete squares;
+}
+
+Board* Board::find_solution(bool (*validator)(Board*)) {
+  return find_solution_internal(validator, 0);
+}
+
+Board* Board::copy() {
+  Board* board = new Board(number_of_squares, number_of_states);
+  for (int i = 0; i < number_of_squares; i++) {
+    board->set_value(i, get_value(i));
+  }
+  return board;
+}
+
+Board* Board::find_solution_internal(bool (*validator)(Board*), int index) {
+  if (index == number_of_squares) {
+    // We've filled all the squares of the board without any problems.
+    return copy();
+  }
+
+  for (int i = 1; i < number_of_states; i++) {
+    set_value(index, i);
+    Board* solution = find_solution_internal(validator, index + 1);
+    if (solution != NULL) {
+      return solution;
+    }
+  }
+  return NULL;
 }
