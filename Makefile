@@ -26,8 +26,11 @@ board.o: board.cpp
 search.o: search.cpp
 	g++ -c search.cpp
 
-search: board.o search.o
-	g++ board.o search.o -o search
+state.o: state.cpp
+	g++ -c state.cpp
+
+search: board.o search.o state.o
+	g++ board.o search.o state.o -o search
 
 clean: 
 	rm *.o search
