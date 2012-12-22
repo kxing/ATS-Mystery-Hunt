@@ -27,7 +27,7 @@
 
 const State* EMPTY = 0;
 
-Board::Board(int number_of_squares,
+Board::Board(const int number_of_squares,
              const StateList* state_list,
              bool (*validator)(Board*)) :
     number_of_squares(number_of_squares),
@@ -45,7 +45,7 @@ Board* Board::find_solution() {
   return find_solution_internal(0);
 }
 
-Board* Board::copy() {
+Board* Board::copy() const {
   Board* board = new Board(number_of_squares, state_list, validator);
   for (int i = 0; i < number_of_squares; i++) {
     board->set_value(i, get_value(i));

@@ -32,12 +32,12 @@ extern const State* EMPTY;
 
 class Board {
  public:
-  Board(int number_of_squares,
+  Board(const int number_of_squares,
         const StateList* const state_list,
         bool (*validator)(Board*));
   ~Board();
 
-  Square get_value(int index) {
+  Square get_value(int index) const {
     return squares[index];
   }
 
@@ -51,17 +51,18 @@ class Board {
   Board* find_solution();
 
  private:
-  int number_of_squares;
+  const int number_of_squares;
   const StateList* const state_list;
 
   // Array of State* pointers, with length |number_of_squares|.
-  Square* squares;
+  Square* const squares;
 
+  // Function to check if the state of the Board is reasonable.
   bool (*validator)(Board*);
 
   // Returns a copy of the board. The caller is responsible for freeing the
   // memory allocated.
-  Board* copy();
+  Board* copy() const;
 
   // Returns a board containing the solution, if it exists.
   // Returns NULL if there is no solution.
