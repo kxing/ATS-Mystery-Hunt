@@ -20,7 +20,8 @@
 
 #include "state.h"
 
-State::State() {
+State::State(const char* pretty_print_string) :
+    pretty_print_string(pretty_print_string) {
 }
 
 State::~State() {

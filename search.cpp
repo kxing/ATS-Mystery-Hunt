@@ -27,11 +27,11 @@
 const int number_of_squares = 5;
 const int number_of_states = 5;
 
-const State RED;
-const State BLUE;
-const State YELLOW;
-const State GREEN;
-const State BLACK;
+const State RED("red");
+const State BLUE("blue");
+const State YELLOW("yellow");
+const State GREEN("green");
+const State BLACK("black");
 
 const State* STATES[5] = {
   &RED,

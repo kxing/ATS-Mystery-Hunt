@@ -23,8 +23,11 @@
 
 class State {
  public:
-  State();
+  State(const char* pretty_print_string);
   ~State();
+
+ private:
+  const char* pretty_print_string;
 };
 
 #endif  // _STATE_H_
