@@ -18,22 +18,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+CXX := g++
+CXX_FLAGS := -Wall
+
+ifeq ($(NDEBUG), 1)
+  CXX_FLAGS += -DNDEBUG
+endif
+
 all: search
 
 board.o: board.cpp
-	g++ -c board.cpp
+	$(CXX) $(CXX_FLAGS) -c board.cpp
 
 search.o: search.cpp
-	g++ -c search.cpp
+	$(CXX) $(CXX_FLAGS) -c search.cpp
 
 state.o: state.cpp
-	g++ -c state.cpp
+	$(CXX) $(CXX_FLAGS) -c state.cpp
 
 state_list.o: state_list.cpp
-	g++ -c state_list.cpp
+	$(CXX) $(CXX_FLAGS) -c state_list.cpp
 
 search: board.o search.o state.o state_list.o
-	g++ board.o search.o state.o state_list.o -o search
+	$(CXX) board.o search.o state.o state_list.o -o search
 
 clean: 
-	rm *.o search
+	rm -f *.o search
