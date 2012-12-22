@@ -58,32 +58,32 @@ const State* STATES[NUMBER_OF_STATES] = {
 
 const StateList STATE_LIST(STATES, NUMBER_OF_STATES);
 
-bool validator(Board* b) {
+bool validator(Board* board) {
   // Any two people sitting next to each other wear different-colored hats.
   for (int i = 1; i < NUMBER_OF_SQUARES; i++) {
-    if (b->is_empty(i - 1) || b->is_empty(i)) {
+    if (board->is_empty(i - 1) || board->is_empty(i)) {
       continue;
     }
-    if (b->get_value(i - 1) == b->get_value(i)) {
+    if (board->get_value(i - 1) == board->get_value(i)) {
       return false;
     }
   }
 
   // The second person wears a blue hat.
-  if (!b->is_empty(2 - 1) && b->get_value(2 - 1) != BLUE) {
+  if (!board->is_empty(2 - 1) && board->get_value(2 - 1) != BLUE) {
     return false;
   }
 
   // The hats belonging to the first and fourth people are the same color.
-  if (!b->is_empty(1 - 1) && !b->is_empty(4 - 1) &&
-      b->get_value(1 - 1) != b->get_value(4 - 1)) {
+  if (!board->is_empty(1 - 1) && !board->is_empty(4 - 1) &&
+      board->get_value(1 - 1) != board->get_value(4 - 1)) {
     return false;
   }
 
   // Among the five hats, there is more than one blue hat.
   int blue_hat_counter = 0;
   for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
-    if (b->is_empty(i) || b->get_value(i) == BLUE) {
+    if (board->is_empty(i) || board->get_value(i) == BLUE) {
       blue_hat_counter++;
     }
   }
@@ -92,7 +92,7 @@ bool validator(Board* b) {
   }
 
   // The hat belonging to the fourth person is not white.
-  if (b->get_value(4 - 1) == WHITE) {
+  if (board->get_value(4 - 1) == WHITE) {
     return false;
   }
 
@@ -102,8 +102,8 @@ bool validator(Board* b) {
 int main() {
   int search_order[NUMBER_OF_SQUARES] = {2 - 1, 1 - 1, 4 - 1, 3 - 1, 5 - 1};
 
-  Board b(NUMBER_OF_SQUARES, &STATE_LIST, search_order, &validator);
-  Board* solution = b.find_solution();
+  Board board(NUMBER_OF_SQUARES, &STATE_LIST, search_order, &validator);
+  Board* solution = board.find_solution();
 
   if (solution == NULL) {
     // Found no solution.
