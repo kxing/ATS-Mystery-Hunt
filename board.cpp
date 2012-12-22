@@ -29,11 +29,28 @@
 
 Board::Board(const int number_of_squares,
              const StateList* state_list,
+             const int* const search_order,
              bool (*validator)(Board*)) :
     number_of_squares(number_of_squares),
     state_list(state_list),
+    search_order(search_order),
     squares(new Square[number_of_squares]),
     validator(validator) {
+
+  #ifndef NDEBUG
+  // Check that the search order is valid.
+  for (int i = 0; i < number_of_squares; i++) {
+    bool found = false;
+    for (int j = 0; j < number_of_squares; j++) {
+      if (search_order[j] == i) {
+        found = true;
+        break;
+      }
+    }
+    assert(found);
+  }
+  #endif
+
   // Initialize the square to |EMPTY|.
   for (int i = 0; i < number_of_squares; i++) {
     squares[i] = EMPTY;
@@ -68,7 +85,10 @@ void Board::pretty_print() const {
 }
 
 Board* Board::copy() const {
-  Board* board = new Board(number_of_squares, state_list, validator);
+  Board* board = new Board(number_of_squares,
+                           state_list,
+                           search_order,
+                           validator);
   for (int i = 0; i < number_of_squares; i++) {
     board->set_value(i, get_value(i));
   }
@@ -82,7 +102,7 @@ bool Board::find_solution_internal(int index) {
   }
 
   for (int i = 0; i < state_list->get_number_of_states(); i++) {
-    set_value(index, state_list->get_state(i));
+    set_value(search_order[index], state_list->get_state(i));
 
     if (!validator(this)) {
       // Stop if the current state is impossible.

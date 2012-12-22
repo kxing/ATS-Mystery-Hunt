@@ -32,6 +32,7 @@ class Board {
  public:
   Board(const int number_of_squares,
         const StateList* const state_list,
+        const int* const search_order,
         bool (*validator)(Board*));
   ~Board();
 
@@ -65,6 +66,9 @@ class Board {
  private:
   const int number_of_squares;
   const StateList* const state_list;
+
+  // Array of int pointers, with length |number_of_squares|.
+  const int* const search_order;
 
   // Array of State* pointers, with length |number_of_squares|.
   Square* const squares;
