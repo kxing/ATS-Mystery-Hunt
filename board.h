@@ -22,9 +22,9 @@
 #define _BOARD_H_
 
 #include <assert.h>
-#include "state_list.h"
 
-class State;
+#include "state.h"
+#include "state_list.h"
 
 typedef const State* Square;
 
@@ -36,13 +36,22 @@ class Board {
   ~Board();
 
   Square get_value(int index) const {
+    assert(is_valid_index(index));
     assert(state_list->is_valid_state(squares[index]));
+
     return squares[index];
   }
 
   void set_value(int index, Square value) {
+    assert(is_valid_index(index));
     assert(state_list->is_valid_state(value));
+
     squares[index] = value;
+  }
+
+  bool is_empty(int index) const {
+    assert(is_valid_index(index));
+    return (squares[index] == EMPTY);
   }
 
   // Returns a board containing the solution, if it exists.
@@ -71,6 +80,12 @@ class Board {
   // Returns NULL if there is no solution.
   // The caller is responsible for freeing the pointer, if it is non-NULL.
   bool find_solution_internal(int index);
+
+  #ifndef NDEBUG
+  bool is_valid_index(int index) const {
+    return (0 <= index) && (index < number_of_squares);
+  }
+  #endif
 };
 
 #endif  // _BOARD_H_
