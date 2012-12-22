@@ -27,9 +27,6 @@
 #include "state.h"
 #include "state_list.h"
 
-const State EMPTY_STATE("empty");
-const State* EMPTY = &EMPTY_STATE;
-
 Board::Board(const int number_of_squares,
              const StateList* state_list,
              bool (*validator)(Board*)) :

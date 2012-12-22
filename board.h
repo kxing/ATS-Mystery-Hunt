@@ -22,13 +22,11 @@
 #define _BOARD_H_
 
 #include <assert.h>
+#include "state_list.h"
 
 class State;
-class StateList;
 
 typedef const State* Square;
-
-extern const State* EMPTY;
 
 class Board {
  public:
@@ -38,10 +36,12 @@ class Board {
   ~Board();
 
   Square get_value(int index) const {
+    assert(state_list->is_valid_state(squares[index]));
     return squares[index];
   }
 
   void set_value(int index, Square value) {
+    assert(state_list->is_valid_state(value));
     squares[index] = value;
   }
 

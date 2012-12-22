@@ -20,9 +20,26 @@
 
 #include "state_list.h"
 
+#include "state.h"
+
 StateList::StateList(const State* const * const states, int number_of_states) :
     states(states), number_of_states(number_of_states) {
 }
 
 StateList::~StateList() {
 }
+
+#ifndef NDEBUG
+bool StateList::is_valid_state(const State* const state) const {
+  if (state == EMPTY) {
+    return true;
+  }
+
+  for (int i = 0; i < number_of_states; i++) {
+    if (states[i] == state) {
+      return true;
+    }
+  }
+  return false;
+}
+#endif

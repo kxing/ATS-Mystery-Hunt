@@ -36,6 +36,10 @@ class StateList {
     return states[index];
   }
 
+  #ifndef NDEBUG
+  bool is_valid_state(const State* const state) const;
+  #endif
+
  private:
   const State* const * const states;
   int number_of_states;

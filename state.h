@@ -34,4 +34,6 @@ class State {
   const char* pretty_print_string;
 };
 
+extern const State* EMPTY;
+
 #endif  // _STATE_H_
