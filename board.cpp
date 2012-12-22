@@ -81,7 +81,7 @@ bool Board::find_solution_internal(int index) {
     return true;
   }
 
-  for (int i = 0; i <= state_list->get_number_of_states(); i++) {
+  for (int i = 0; i < state_list->get_number_of_states(); i++) {
     set_value(index, state_list->get_state(i));
 
     if (!validator(this)) {
@@ -94,5 +94,6 @@ bool Board::find_solution_internal(int index) {
       return true;
     }
   }
+  set_value(index, EMPTY);
   return false;
 }

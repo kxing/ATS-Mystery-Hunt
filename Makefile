@@ -22,7 +22,9 @@ CXX := g++
 CXX_FLAGS := -Wall
 
 ifeq ($(NDEBUG), 1)
-  CXX_FLAGS += -DNDEBUG
+  CXX_FLAGS += -O3 -DNDEBUG
+else
+  CXX_FLAGS += -O0 -g
 endif
 
 all: search
