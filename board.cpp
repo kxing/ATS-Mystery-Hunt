@@ -52,8 +52,14 @@ Board* Board::find_solution_internal(bool (*validator)(Board*), int index) {
     return copy();
   }
 
-  for (int i = 1; i < number_of_states; i++) {
+  for (int i = 1; i <= number_of_states; i++) {
     set_value(index, i);
+
+    if (!validator(this)) {
+      // Stop if the current state is impossible.
+      continue;
+    }
+
     Board* solution = find_solution_internal(validator, index + 1);
     if (solution != NULL) {
       return solution;

@@ -22,24 +22,43 @@
 
 #include "board.h"
 
+const int number_of_squares = 5;
+const int number_of_states = 5;
+
 bool validator(Board* b) {
+  // Tests for distinct numbers.
+  for (int i = 0; i < number_of_squares; i++) {
+    if (b->get_value(i) == EMPTY) {
+      continue;
+    }
+
+    for (int j = i + 1; j < number_of_squares; j++) {
+      if (b->get_value(j) == EMPTY) {
+        continue;
+      }
+
+      if (b->get_value(i) == b->get_value(j)) {
+        return false;
+      }
+    }
+  }
   return true;
 }
 
 int main() {
-  const int number_of_squares = 5;
-  const int number_of_states = 7;
-
   Board b(number_of_squares, number_of_states);
   Board* solution = b.find_solution(&validator);
 
   if (solution == NULL) {
+    // Found no solution.
     printf("No solution found\n");
+  } else {
+    // Found a solution.
+    for (int i = 0; i < number_of_squares; i++) {
+      printf("%d ", solution->get_value(i));
+    }
+    printf("\n");
+    delete solution;
   }
-  for (int i = 0; i < number_of_squares; i++) {
-    printf("%d ", solution->get_value(i));
-  }
-  printf("\n");
-  delete solution;
   return 0;
 }
