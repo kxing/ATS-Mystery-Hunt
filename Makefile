@@ -21,19 +21,21 @@
 CXX := g++
 CXX_FLAGS := -Wall
 
+EXAMPLE_EXECUTABLE := example
+
 ifeq ($(NDEBUG), 1)
   CXX_FLAGS += -O3 -DNDEBUG
 else
   CXX_FLAGS += -O0 -g
 endif
 
-all: search
+all: $(EXAMPLE_EXECUTABLE)
 
 board.o: board.cpp
 	$(CXX) $(CXX_FLAGS) -c board.cpp
 
-search.o: search.cpp
-	$(CXX) $(CXX_FLAGS) -c search.cpp
+example.o: example.cpp
+	$(CXX) $(CXX_FLAGS) -c example.cpp
 
 state.o: state.cpp
 	$(CXX) $(CXX_FLAGS) -c state.cpp
@@ -41,8 +43,8 @@ state.o: state.cpp
 state_list.o: state_list.cpp
 	$(CXX) $(CXX_FLAGS) -c state_list.cpp
 
-search: board.o search.o state.o state_list.o
-	$(CXX) board.o search.o state.o state_list.o -o search
+example: board.o example.o state.o state_list.o
+	$(CXX) board.o example.o state.o state_list.o -o $(EXAMPLE_EXECUTABLE)
 
 clean: 
-	rm -f *.o search
+	rm -f *.o $(EXAMPLE_EXECUTABLE)
