@@ -33,7 +33,7 @@ extern const State* EMPTY;
 class Board {
  public:
   Board(int number_of_squares,
-        const StateList* state_list,
+        const StateList* const state_list,
         bool (*validator)(Board*));
   ~Board();
 
@@ -52,7 +52,7 @@ class Board {
 
  private:
   int number_of_squares;
-  const StateList* state_list;
+  const StateList* const state_list;
 
   // Array of State* pointers, with length |number_of_squares|.
   Square* squares;

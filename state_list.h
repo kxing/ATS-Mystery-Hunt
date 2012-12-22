@@ -25,7 +25,7 @@ class State;
 
 class StateList {
  public:
-  StateList(const State** states, int number_of_states);
+  StateList(const State* const * const states, int number_of_states);
   ~StateList();
 
   int get_number_of_states() const {
@@ -37,7 +37,7 @@ class StateList {
   }
 
  private:
-  const State** states;
+  const State* const * const states;
   int number_of_states;
 };
 
