@@ -23,10 +23,10 @@
 
 #include <assert.h>
 
-typedef int square_t;
-
 class State;
 class StateList;
+
+typedef State* Square;
 
 extern const State* EMPTY;
 
@@ -37,12 +37,12 @@ class Board {
         bool (*validator)(Board*));
   ~Board();
 
-  State* get_value(int index) {
+  Square get_value(int index) {
     return squares[index];
   }
 
-  void set_value(int index, const State* value) {
-    squares[index] = const_cast<State*>(value);
+  void set_value(int index, Square value) {
+    squares[index] = value;
   }
 
   // Returns a board containing the solution, if it exists.
@@ -55,7 +55,7 @@ class Board {
   const StateList* state_list;
 
   // Array of State* pointers, with length |number_of_squares|.
-  State** squares;
+  Square* squares;
 
   bool (*validator)(Board*);
 
