@@ -43,11 +43,19 @@ Board::Board(const int number_of_squares,
 }
 
 Board::~Board() {
-  delete squares;
+  delete[] squares;
 }
 
-Board* Board::find_solution() {
-  return find_solution_internal(0);
+Board* Board::find_solution() const {
+  // Make a copy, and operate on it.
+  Board* board = copy();
+  bool success = board->find_solution_internal(0);
+  if (success) {
+    return board;
+  } else {
+    delete board;
+    return NULL;
+  }
 }
 
 Board* Board::copy() const {
@@ -58,10 +66,10 @@ Board* Board::copy() const {
   return board;
 }
 
-Board* Board::find_solution_internal(int index) {
+bool Board::find_solution_internal(int index) {
   if (index == number_of_squares) {
     // We've filled all the squares of the board without any problems.
-    return copy();
+    return true;
   }
 
   for (int i = 0; i <= state_list->get_number_of_states(); i++) {
@@ -72,10 +80,10 @@ Board* Board::find_solution_internal(int index) {
       continue;
     }
 
-    Board* solution = find_solution_internal(index + 1);
-    if (solution != NULL) {
-      return solution;
+    bool success = find_solution_internal(index + 1);
+    if (success) {
+      return true;
     }
   }
-  return NULL;
+  return false;
 }

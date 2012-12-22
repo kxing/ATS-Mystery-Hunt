@@ -48,7 +48,7 @@ class Board {
   // Returns a board containing the solution, if it exists.
   // Returns NULL if there is no solution.
   // The caller is responsible for freeing the pointer, if it is non-NULL.
-  Board* find_solution();
+  Board* find_solution() const;
 
  private:
   const int number_of_squares;
@@ -67,7 +67,7 @@ class Board {
   // Returns a board containing the solution, if it exists.
   // Returns NULL if there is no solution.
   // The caller is responsible for freeing the pointer, if it is non-NULL.
-  Board* find_solution_internal(int index);
+  bool find_solution_internal(int index);
 };
 
 #endif  // _BOARD_H_
