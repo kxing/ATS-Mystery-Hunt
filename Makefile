@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 
 CXX := g++
-CXX_FLAGS := -Wall
+CXX_FLAGS := -Wall -I./
 
 EXAMPLE_EXECUTABLE := example
 
@@ -43,8 +43,14 @@ state.o: state.cpp
 state_list.o: state_list.cpp
 	$(CXX) $(CXX_FLAGS) -c state_list.cpp
 
+thermometers.o: tests/thermometers.cpp
+	$(CXX) $(CXX_FLAGS) -c tests/thermometers.cpp
+
 example: board.o example.o state.o state_list.o
 	$(CXX) board.o example.o state.o state_list.o -o $(EXAMPLE_EXECUTABLE)
+
+thermometers: board.o state.o state_list.o thermometers.o
+	$(CXX) board.o state.o state_list.o thermometers.o -o thermometers
 
 clean: 
 	rm -f *.o $(EXAMPLE_EXECUTABLE)
