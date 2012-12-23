@@ -21,7 +21,12 @@
 CXX := g++
 CXX_FLAGS := -Wall -I./
 
+LIB_OBJECTS := board.o state.o state_list.o
+
 EXAMPLE_EXECUTABLE := example
+THERMOMETERS_EXECUTABLE := thermometers
+
+ALL_EXECUTABLES := $(EXAMPLE_EXECUTABLE) $(THERMOMETERS_EXECUTABLE)
 
 ifeq ($(NDEBUG), 1)
   CXX_FLAGS += -O3 -DNDEBUG
@@ -29,13 +34,10 @@ else
   CXX_FLAGS += -O0 -g
 endif
 
-all: $(EXAMPLE_EXECUTABLE)
+all: $(ALL_EXECUTABLES) 
 
 board.o: board.cpp
 	$(CXX) $(CXX_FLAGS) -c board.cpp
-
-example.o: example.cpp
-	$(CXX) $(CXX_FLAGS) -c example.cpp
 
 state.o: state.cpp
 	$(CXX) $(CXX_FLAGS) -c state.cpp
@@ -43,14 +45,17 @@ state.o: state.cpp
 state_list.o: state_list.cpp
 	$(CXX) $(CXX_FLAGS) -c state_list.cpp
 
+example.o: example.cpp
+	$(CXX) $(CXX_FLAGS) -c example.cpp
+
 thermometers.o: tests/thermometers.cpp
 	$(CXX) $(CXX_FLAGS) -c tests/thermometers.cpp
 
-example: board.o example.o state.o state_list.o
-	$(CXX) board.o example.o state.o state_list.o -o $(EXAMPLE_EXECUTABLE)
+example: $(LIB_OBJECTS) example.o
+	$(CXX) $(LIB_OBJECTS) example.o -o $(EXAMPLE_EXECUTABLE)
 
-thermometers: board.o state.o state_list.o thermometers.o
-	$(CXX) board.o state.o state_list.o thermometers.o -o thermometers
+thermometers: $(LIB_OBJECTS) thermometers.o
+	$(CXX) $(LIB_OBJECTS) thermometers.o -o $(THERMOMETERS_EXECUTABLE)
 
 clean: 
-	rm -f *.o $(EXAMPLE_EXECUTABLE)
+	rm -f *.o $(ALL_EXECUTABLES)
