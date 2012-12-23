@@ -127,6 +127,6 @@ bool Board::find_solution_internal(int index) {
       return true;
     }
   }
-  set_value(index, EMPTY);
+  set_value(search_order[index], EMPTY);
   return false;
 }
