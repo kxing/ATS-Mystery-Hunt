@@ -33,9 +33,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "board.h"
-#include "state.h"
-#include "state_list.h"
+#include "include/board.h"
+#include "include/state.h"
+#include "include/state_list.h"
 
 const int NUMBER_OF_ROWS = 4;
 const int NUMBER_OF_COLUMNS = 4;

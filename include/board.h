@@ -23,8 +23,8 @@
 
 #include <assert.h>
 
-#include "state.h"
-#include "state_list.h"
+#include "include/state.h"
+#include "include/state_list.h"
 
 class Board;
 

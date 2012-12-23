@@ -18,14 +18,14 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include "board.h"
+#include "include/board.h"
 
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "state.h"
-#include "state_list.h"
+#include "include/state.h"
+#include "include/state_list.h"
 
 Board::Board(const int number_of_squares,
              const StateList* state_list,

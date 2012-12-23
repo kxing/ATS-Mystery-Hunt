@@ -18,14 +18,28 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include "state.h"
+#include "include/state_list.h"
 
-const State EMPTY_STATE("empty");
-const State* EMPTY = &EMPTY_STATE;
+#include "include/state.h"
 
-State::State(const char* pretty_print_string) :
-    pretty_print_string(pretty_print_string) {
+StateList::StateList(const State* const * const states, int number_of_states) :
+    states(states), number_of_states(number_of_states) {
 }
 
-State::~State() {
+StateList::~StateList() {
 }
+
+#ifndef NDEBUG
+bool StateList::is_valid_state(const State* const state) const {
+  if (state == EMPTY) {
+    return true;
+  }
+
+  for (int i = 0; i < number_of_states; i++) {
+    if (states[i] == state) {
+      return true;
+    }
+  }
+  return false;
+}
+#endif

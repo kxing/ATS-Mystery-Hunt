@@ -39,14 +39,14 @@ all: $(ALL_EXECUTABLES)
 # ------------------------------------------------------------------------------
 # Library source files.
 # ------------------------------------------------------------------------------
-board.o: board.cpp
-	$(CXX) $(CXX_FLAGS) -c board.cpp
+board.o: include/board.cpp
+	$(CXX) $(CXX_FLAGS) -c include/board.cpp
 
-state.o: state.cpp
-	$(CXX) $(CXX_FLAGS) -c state.cpp
+state.o: include/state.cpp
+	$(CXX) $(CXX_FLAGS) -c include/state.cpp
 
-state_list.o: state_list.cpp
-	$(CXX) $(CXX_FLAGS) -c state_list.cpp
+state_list.o: include/state_list.cpp
+	$(CXX) $(CXX_FLAGS) -c include/state_list.cpp
 
 # ------------------------------------------------------------------------------
 # Test files.
