@@ -26,14 +26,17 @@
 #include "state.h"
 #include "state_list.h"
 
+class Board;
+
 typedef const State* Square;
+typedef bool (*BoardValidator)(Board*);
 
 class Board {
  public:
   Board(const int number_of_squares,
         const StateList* const state_list,
         const int* const search_order,
-        bool (*validator)(Board*));
+        BoardValidator validator);
   ~Board();
 
   Square get_value(int index) const {
@@ -74,7 +77,7 @@ class Board {
   Square* const squares;
 
   // Function to check if the state of the Board is reasonable.
-  bool (*validator)(Board*);
+  BoardValidator validator;
 
   // Returns a copy of the board. The caller is responsible for freeing the
   // memory allocated.

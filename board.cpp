@@ -30,7 +30,7 @@
 Board::Board(const int number_of_squares,
              const StateList* state_list,
              const int* const search_order,
-             bool (*validator)(Board*)) :
+             BoardValidator validator) :
     number_of_squares(number_of_squares),
     state_list(state_list),
     search_order(search_order),
