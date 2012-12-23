@@ -64,7 +64,7 @@ class Board {
   Board* find_solution() const;
 
   // Prints the board.
-  void pretty_print() const;
+  void pretty_print(int items_per_line = 0) const;
 
  private:
   const int number_of_squares;

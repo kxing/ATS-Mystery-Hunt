@@ -73,15 +73,28 @@ Board* Board::find_solution() const {
   }
 }
 
-void Board::pretty_print() const {
+void Board::pretty_print(int items_per_line) const {
+  // The number of items printed on the current line.
+  int line_counter = 0;
   for (int i = 0; i < number_of_squares; i++) {
-    if (i == 0) {
+    if (line_counter == 0) {
       printf("%s", squares[i]->get_pretty_print_string());
     } else {
       printf(" %s", squares[i]->get_pretty_print_string());
     }
+    line_counter++;
+
+    // Start a new line if we've hit our quota.
+    if (line_counter == items_per_line) {
+      printf("\n");
+      line_counter = 0;
+    }
   }
-  printf("\n");
+
+  // Adjustment for the case when everything is on one line.
+  if (items_per_line == 0) {
+    printf("\n");
+  }
 }
 
 Board* Board::copy() const {

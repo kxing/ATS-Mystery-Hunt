@@ -186,8 +186,8 @@ int main() {
     // Found no solution.
     printf("No solution found\n");
   } else {
-    // Found a solution.
-    solution->pretty_print();
+    // Found a solution - print it out, four to a line.
+    solution->pretty_print(4);
     delete solution;
   }
   return 0;
