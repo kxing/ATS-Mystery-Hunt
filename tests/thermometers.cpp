@@ -53,7 +53,7 @@ const State* STATES[NUMBER_OF_STATES] = {
 const StateList STATE_LIST(STATES, NUMBER_OF_STATES);
 
 // Rows use zero-based indexing.
-bool valid_row_count(Board* board, int row, int target) {
+bool valid_row_count(const Board* const board, int row, int target) {
   int min_sum = 0;
   int max_sum = 4;
   for (int i = 4 * row; i < 4 + 4 * row; i++) {
@@ -70,7 +70,7 @@ bool valid_row_count(Board* board, int row, int target) {
   return true;
 }// Rows use zero-based indexing.
 
-bool valid_column_count(Board* board, int column, int target) {
+bool valid_column_count(const Board* const board, int column, int target) {
   int min_sum = 0;
   int max_sum = 4;
   for (int i = column; i < NUMBER_OF_SQUARES; i += 4) {
@@ -87,7 +87,7 @@ bool valid_column_count(Board* board, int column, int target) {
   return true;
 }
 
-bool validator(Board* board) {
+bool validator(const Board* const board) {
   // Thermometer along row 1.
   if (board->get_value(0) == UNFILLED && board->get_value(1) == FILLED) {
     return false;

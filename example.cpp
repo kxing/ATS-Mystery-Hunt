@@ -58,7 +58,7 @@ const State* STATES[NUMBER_OF_STATES] = {
 
 const StateList STATE_LIST(STATES, NUMBER_OF_STATES);
 
-bool validator(Board* board) {
+bool validator(const Board* const board) {
   // Any two people sitting next to each other wear different-colored hats.
   for (int i = 1; i < NUMBER_OF_SQUARES; i++) {
     if (board->is_empty(i - 1) || board->is_empty(i)) {

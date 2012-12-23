@@ -29,7 +29,7 @@
 class Board;
 
 typedef const State* Square;
-typedef bool (*BoardValidator)(Board*);
+typedef bool (*BoardValidator)(const Board* const);
 
 class Board {
  public:
