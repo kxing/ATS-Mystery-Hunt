@@ -36,6 +36,9 @@ endif
 
 all: $(ALL_EXECUTABLES) 
 
+# ------------------------------------------------------------------------------
+# Library source files.
+# ------------------------------------------------------------------------------
 board.o: board.cpp
 	$(CXX) $(CXX_FLAGS) -c board.cpp
 
@@ -45,17 +48,24 @@ state.o: state.cpp
 state_list.o: state_list.cpp
 	$(CXX) $(CXX_FLAGS) -c state_list.cpp
 
-example.o: example.cpp
-	$(CXX) $(CXX_FLAGS) -c example.cpp
-
-thermometers.o: tests/thermometers.cpp
-	$(CXX) $(CXX_FLAGS) -c tests/thermometers.cpp
+# ------------------------------------------------------------------------------
+# Test files.
+# ------------------------------------------------------------------------------
+example.o: tests/example.cpp
+	$(CXX) $(CXX_FLAGS) -c tests/example.cpp
 
 example: $(LIB_OBJECTS) example.o
 	$(CXX) $(LIB_OBJECTS) example.o -o $(EXAMPLE_EXECUTABLE)
 
+thermometers.o: tests/thermometers.cpp
+	$(CXX) $(CXX_FLAGS) -c tests/thermometers.cpp
+
 thermometers: $(LIB_OBJECTS) thermometers.o
 	$(CXX) $(LIB_OBJECTS) thermometers.o -o $(THERMOMETERS_EXECUTABLE)
 
+
+# ------------------------------------------------------------------------------
+# Clean.
+# ------------------------------------------------------------------------------
 clean: 
 	rm -f *.o $(ALL_EXECUTABLES)
