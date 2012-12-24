@@ -32,6 +32,8 @@ class State {
 
  private:
   const char* pretty_print_string;
+
+  static const char* string_copy(const char* string);
 };
 
 extern const State* EMPTY;

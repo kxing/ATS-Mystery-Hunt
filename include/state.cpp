@@ -20,12 +20,22 @@
 
 #include "include/state.h"
 
+#include <string.h>
+
 const State EMPTY_STATE("empty");
 const State* EMPTY = &EMPTY_STATE;
 
 State::State(const char* pretty_print_string) :
-    pretty_print_string(pretty_print_string) {
+    pretty_print_string(string_copy(pretty_print_string)) {
 }
 
 State::~State() {
+  delete[] pretty_print_string;
+}
+
+// static
+const char* State::string_copy(const char* string) {
+  char* new_string = new char[strlen(string) + 1];
+  strcpy(new_string, string);
+  return new_string;
 }
