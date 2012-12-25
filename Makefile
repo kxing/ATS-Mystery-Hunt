@@ -24,9 +24,14 @@ CXX_FLAGS := -Wall -I./
 LIB_OBJECTS := board.o state.o state_list.o
 
 EXAMPLE_EXECUTABLE := example
-THERMOMETERS_EXECUTABLE := thermometers
+EXAMPLE_SOURCE := tests/example.cpp
+EXAMPLE_OBJECT := example.o
 
-ALL_EXECUTABLES := $(EXAMPLE_EXECUTABLE) $(THERMOMETERS_EXECUTABLE)
+THERMOMETERS_SIMPLE_EXECUTABLE := thermometers_simple
+THERMOMETERS_SOURCE := tests/thermometers_simple.cpp
+THERMOMETERS_OBJECT := thermometers_simple.o
+
+ALL_EXECUTABLES := $(EXAMPLE_EXECUTABLE) $(THERMOMETERS_SIMPLE_EXECUTABLE)
 
 ifeq ($(NDEBUG), 1)
   CXX_FLAGS += -O3 -DNDEBUG
@@ -51,17 +56,17 @@ state_list.o: include/state_list.cpp
 # ------------------------------------------------------------------------------
 # Test files.
 # ------------------------------------------------------------------------------
-example.o: tests/example.cpp
-	$(CXX) $(CXX_FLAGS) -c tests/example.cpp
+$(EXAMPLE_OBJECT): $(EXAMPLE_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(EXAMPLE_SOURCE)
 
-example: $(LIB_OBJECTS) example.o
-	$(CXX) $(LIB_OBJECTS) example.o -o $(EXAMPLE_EXECUTABLE)
+$(EXAMPLE_EXECUTABLE): $(LIB_OBJECTS) $(EXAMPLE_OBJECT)
+	$(CXX) $(LIB_OBJECTS) $(EXAMPLE_OBJECT) -o $(EXAMPLE_EXECUTABLE)
 
-thermometers.o: tests/thermometers.cpp
-	$(CXX) $(CXX_FLAGS) -c tests/thermometers.cpp
+$(THERMOMETERS_OBJECT): $(THERMOMETERS_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(THERMOMETERS_SOURCE)
 
-thermometers: $(LIB_OBJECTS) thermometers.o
-	$(CXX) $(LIB_OBJECTS) thermometers.o -o $(THERMOMETERS_EXECUTABLE)
+$(THERMOMETERS_SIMPLE_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_OBJECT)
+	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_OBJECT) -o $(THERMOMETERS_SIMPLE_EXECUTABLE)
 
 
 # ------------------------------------------------------------------------------
