@@ -18,34 +18,30 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#ifndef _BRAILLE_BOARD_H_
-#define _BRAILLE_BOARD_H_
+#ifndef _BRAILLE_BOARD_UTILS_
+#define _BRAILLE_BOARD_UTILS_
 
-#include "include/state_list.h"
+#include "include/board.h"
+#include "tests/mystery_hunt/braille_board.h"
 
-#define NUMBER_OF_ROWS 5
-#define NUMBER_OF_COLUMNS 5
-#define NUMBER_OF_SQUARES (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS)
+static SmallSquareType get_small_square_type(const Board* const board, int index) {
+  int big_row =
+      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_ROWS;
+  int big_column =
+      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_COLUMNS;
+  int small_row =
+      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_ROWS;
+  int small_column = 
+      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_COLUMNS;
 
-#define BRAILLE_ROWS 3
-#define BRAILLE_COLUMNS 2
+  const State* state = board->get_value(big_row * NUMBER_OF_COLUMNS + big_column);
+  if (state == EMPTY) {
+    return SMALL_EMPTY;
+  }
+  
+  // Get the Braille pattern associated with the letter.
+  char letter = state->get_pretty_print_string()[0];
+  return BRAILLE[letter - 'A'][small_row][small_column];
+}
 
-#define NUMBER_OF_STATES 26
-
-extern const StateList STATE_LIST;
-
-void create_all_states();
-void delete_all_states();
-
-// Fine-grained board.
-enum SmallSquareType {
-  SMALL_EMPTY,
-  SMALL_FILLED,
-  SMALL_UNFILLED,
-};
-
-extern const SmallSquareType BRAILLE[NUMBER_OF_STATES]
-                                    [BRAILLE_ROWS]
-                                    [BRAILLE_COLUMNS];
-
-#endif  // _BRAILLE_BOARD_H_
+#endif  // _BRAILLE_BOARD_UTILS_
