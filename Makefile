@@ -28,10 +28,15 @@ EXAMPLE_SOURCE := tests/example.cpp
 EXAMPLE_OBJECT := example.o
 
 THERMOMETERS_SIMPLE_EXECUTABLE := thermometers_simple
-THERMOMETERS_SOURCE := tests/thermometers_simple.cpp
-THERMOMETERS_OBJECT := thermometers_simple.o
+THERMOMETERS_SIMPLE_SOURCE := tests/thermometers_simple.cpp
+THERMOMETERS_SIMPLE_OBJECT := thermometers_simple.o
 
-ALL_EXECUTABLES := $(EXAMPLE_EXECUTABLE) $(THERMOMETERS_SIMPLE_EXECUTABLE)
+THERMOMETERS_EXECUTABLE := thermometers
+THERMOMETERS_SOURCE := tests/mystery_hunt/thermometers.cpp
+THERMOMETERS_OBJECT := thermometers.o
+
+ALL_EXECUTABLES := $(EXAMPLE_EXECUTABLE) $(THERMOMETERS_SIMPLE_EXECUTABLE) \
+      $(THERMOMETERS_EXECUTABLE)
 
 ifeq ($(NDEBUG), 1)
   CXX_FLAGS += -O3 -DNDEBUG
@@ -44,6 +49,7 @@ all: $(ALL_EXECUTABLES)
 # ------------------------------------------------------------------------------
 # Library source files.
 # ------------------------------------------------------------------------------
+
 board.o: include/board.cpp
 	$(CXX) $(CXX_FLAGS) -c include/board.cpp
 
@@ -56,21 +62,29 @@ state_list.o: include/state_list.cpp
 # ------------------------------------------------------------------------------
 # Test files.
 # ------------------------------------------------------------------------------
+
 $(EXAMPLE_OBJECT): $(EXAMPLE_SOURCE)
 	$(CXX) $(CXX_FLAGS) -c $(EXAMPLE_SOURCE)
 
 $(EXAMPLE_EXECUTABLE): $(LIB_OBJECTS) $(EXAMPLE_OBJECT)
 	$(CXX) $(LIB_OBJECTS) $(EXAMPLE_OBJECT) -o $(EXAMPLE_EXECUTABLE)
 
+$(THERMOMETERS_SIMPLE_OBJECT): $(THERMOMETERS_SIMPLE_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(THERMOMETERS_SIMPLE_SOURCE)
+
+$(THERMOMETERS_SIMPLE_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_SIMPLE_OBJECT)
+	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_SIMPLE_OBJECT) \
+      -o $(THERMOMETERS_SIMPLE_EXECUTABLE)
+
 $(THERMOMETERS_OBJECT): $(THERMOMETERS_SOURCE)
 	$(CXX) $(CXX_FLAGS) -c $(THERMOMETERS_SOURCE)
 
-$(THERMOMETERS_SIMPLE_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_OBJECT)
-	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_OBJECT) -o $(THERMOMETERS_SIMPLE_EXECUTABLE)
-
+$(THERMOMETERS_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_OBJECT)
+	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_OBJECT) -o $(THERMOMETERS_EXECUTABLE)
 
 # ------------------------------------------------------------------------------
 # Clean.
 # ------------------------------------------------------------------------------
+
 clean: 
 	rm -f *.o $(ALL_EXECUTABLES)

@@ -1,4 +1,9 @@
 *.o
 *.swp
+
+# Executables from test/
 example
 thermometers_simple
+
+# Executables from test/mystery_hunt/
+thermometers
