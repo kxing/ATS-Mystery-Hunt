@@ -33,6 +33,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "include/board.h"
 #include "include/state.h"
@@ -451,9 +452,10 @@ bool validator(const Board* const board) {
 }
 
 int main() {
+  clock_t start = clock();
   create_all_states();
   int search_order[NUMBER_OF_SQUARES] = {
-    10, 11, 12, 13, 14, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1, 6, 21, 0, 5, 20, 4, 9, 24, 2, 3, 7, 8, 22, 23,
   };
 
   Board board(NUMBER_OF_SQUARES, &STATE_LIST, search_order, &validator);
@@ -469,5 +471,8 @@ int main() {
     delete solution;
   }
   delete_all_states();
+  clock_t end = clock();
+
+  printf("Time taken: %f seconds.\n", (float)(end - start) / CLOCKS_PER_SEC);
   return 0;
 }
