@@ -18,6 +18,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+// -----------------------------------------------------------------------------
+// The Braille board has 26 states, one for each letter of the alphabet.
+// The board corresponds to another board, consisting of small squares, that
+// represent the pixels of Braille letters.
+// -----------------------------------------------------------------------------
+
 #ifndef _BRAILLE_BOARD_H_
 #define _BRAILLE_BOARD_H_
 
