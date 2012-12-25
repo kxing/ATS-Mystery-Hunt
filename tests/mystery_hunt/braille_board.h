@@ -33,3 +33,14 @@ extern const StateList STATE_LIST;
 
 void create_all_states();
 void delete_all_states();
+
+// Fine-grained board.
+enum SmallSquareType {
+  SMALL_EMPTY,
+  SMALL_FILLED,
+  SMALL_UNFILLED,
+};
+
+extern const SmallSquareType BRAILLE[NUMBER_OF_STATES]
+                                    [BRAILLE_ROWS]
+                                    [BRAILLE_COLUMNS];
