@@ -31,6 +31,9 @@ THERMOMETERS_SIMPLE_EXECUTABLE := thermometers_simple
 THERMOMETERS_SIMPLE_SOURCE := tests/thermometers_simple.cpp
 THERMOMETERS_SIMPLE_OBJECT := thermometers_simple.o
 
+BRAILLE_BOARD_SOURCE := tests/mystery_hunt/braille_board.cpp
+BRAILLE_BOARD_OBJECT := braille_board.o
+
 THERMOMETERS_EXECUTABLE := thermometers
 THERMOMETERS_SOURCE := tests/mystery_hunt/thermometers.cpp
 THERMOMETERS_OBJECT := thermometers.o
@@ -76,11 +79,18 @@ $(THERMOMETERS_SIMPLE_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_SIMPLE_OBJECT)
 	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_SIMPLE_OBJECT) \
       -o $(THERMOMETERS_SIMPLE_EXECUTABLE)
 
+# Braille board for some 2012 Mystery Hunt puzzles.
+$(BRAILLE_BOARD_OBJECT): $(BRAILLE_BOARD_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(BRAILLE_BOARD_SOURCE)
+
 $(THERMOMETERS_OBJECT): $(THERMOMETERS_SOURCE)
 	$(CXX) $(CXX_FLAGS) -c $(THERMOMETERS_SOURCE)
 
-$(THERMOMETERS_EXECUTABLE): $(LIB_OBJECTS) $(THERMOMETERS_OBJECT)
-	$(CXX) $(LIB_OBJECTS) $(THERMOMETERS_OBJECT) -o $(THERMOMETERS_EXECUTABLE)
+$(THERMOMETERS_EXECUTABLE): $(LIB_OBJECTS) \
+                            $(BRAILLE_BOARD_OBJECT) \
+                            $(THERMOMETERS_OBJECT)
+	$(CXX) $(LIB_OBJECTS) $(BRAILLE_BOARD_OBJECT) $(THERMOMETERS_OBJECT) \
+      -o $(THERMOMETERS_EXECUTABLE)
 
 # ------------------------------------------------------------------------------
 # Clean.

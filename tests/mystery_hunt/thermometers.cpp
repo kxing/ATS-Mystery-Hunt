@@ -39,14 +39,7 @@
 #include "include/state.h"
 #include "include/state_list.h"
 
-const int NUMBER_OF_ROWS = 5;
-const int NUMBER_OF_COLUMNS = 5;
-const int NUMBER_OF_SQUARES = NUMBER_OF_ROWS * NUMBER_OF_COLUMNS;
-
-const int BRAILLE_ROWS = 3;
-const int BRAILLE_COLUMNS = 2;
-
-const int NUMBER_OF_STATES = 26;
+#include "tests/mystery_hunt/braille_board.h"
 
 State* ALL_STATES[NUMBER_OF_STATES];
 
