@@ -293,7 +293,14 @@ int main() {
   clock_t start = clock();
   create_all_states();
   int search_order[NUMBER_OF_SQUARES] = {
-    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1, 6, 21, 0, 5, 20, 4, 9, 24, 2, 3, 7, 8, 22, 23,
+    10, 11, 12, 13, 14,
+    15, 16, 17, 18, 19,
+    1, 6, 21,
+    0, 5, 20,
+    4, 9, 24,
+    2, 3,
+    7, 8,
+    22, 23,
   };
 
   Board board(NUMBER_OF_SQUARES, &STATE_LIST, search_order, &validator);
