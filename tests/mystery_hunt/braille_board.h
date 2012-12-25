@@ -18,6 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#include "include/board.h"
 #include "include/state_list.h"
 
 #define NUMBER_OF_ROWS 5
@@ -44,3 +45,23 @@ enum SmallSquareType {
 extern const SmallSquareType BRAILLE[NUMBER_OF_STATES]
                                     [BRAILLE_ROWS]
                                     [BRAILLE_COLUMNS];
+
+static SmallSquareType get_small_square_type(const Board* const board, int index) {
+  int big_row =
+      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_ROWS;
+  int big_column =
+      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_COLUMNS;
+  int small_row =
+      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_ROWS;
+  int small_column = 
+      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_COLUMNS;
+
+  const State* state = board->get_value(big_row * NUMBER_OF_COLUMNS + big_column);
+  if (state == EMPTY) {
+    return SMALL_EMPTY;
+  }
+  
+  // Get the Braille pattern associated with the letter.
+  char letter = state->get_pretty_print_string()[0];
+  return BRAILLE[letter - 'A'][small_row][small_column];
+}

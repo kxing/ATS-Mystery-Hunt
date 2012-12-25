@@ -41,26 +41,6 @@
 
 #include "tests/mystery_hunt/braille_board.h"
 
-SmallSquareType get_small_square_type(const Board* const board, int index) {
-  int big_row =
-      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_ROWS;
-  int big_column =
-      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_COLUMNS;
-  int small_row =
-      (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_ROWS;
-  int small_column = 
-      (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_COLUMNS;
-
-  const State* state = board->get_value(big_row * NUMBER_OF_COLUMNS + big_column);
-  if (state == EMPTY) {
-    return SMALL_EMPTY;
-  }
-  
-  // Get the Braille pattern associated with the letter.
-  char letter = state->get_pretty_print_string()[0];
-  return BRAILLE[letter - 'A'][small_row][small_column];
-}
-
 // Checks to see if the number of filled squares in [start, end] (with step
 // size |step| can ever equal |target|.
 bool valid_line(const Board* const board,
