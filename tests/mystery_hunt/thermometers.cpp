@@ -41,24 +41,6 @@
 
 #include "tests/mystery_hunt/braille_board.h"
 
-State* ALL_STATES[NUMBER_OF_STATES];
-
-void create_all_states() {
-  char pretty_print_string[2] = {'\0', '\0'};
-  for (int i = 0; i < NUMBER_OF_STATES; i++) {
-    pretty_print_string[0] = 'A' + i;
-    ALL_STATES[i] = new State(pretty_print_string);
-  }
-}
-
-void delete_all_states() {
-  for (int i = 0; i < NUMBER_OF_STATES; i++) {
-    delete ALL_STATES[i];
-  }
-}
-
-const StateList STATE_LIST(ALL_STATES, NUMBER_OF_STATES);
-
 // Fine-grained board.
 enum SmallSquareType {
   SMALL_EMPTY,

@@ -18,6 +18,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#include "include/state_list.h"
+
 #define NUMBER_OF_ROWS 5
 #define NUMBER_OF_COLUMNS 5
 #define NUMBER_OF_SQUARES (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS)
@@ -26,3 +28,8 @@
 #define BRAILLE_COLUMNS 2
 
 #define NUMBER_OF_STATES 26
+
+extern const StateList STATE_LIST;
+
+void create_all_states();
+void delete_all_states();
