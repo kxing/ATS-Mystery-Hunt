@@ -73,7 +73,20 @@ int row_and_column_to_square(int row, int column) {
   return row * NUMBER_OF_COLUMNS + column;
 }
 
-const int VARIABLE = 9999;
+const int VARIABLE = NUMBER_OF_SQUARES + 1;
+
+// Returns true if one of the following conditions is true:
+//    - The size of the block of either land/water starting at |square| is
+//      exactly |target|.
+//    - The block of land/water starting at |square| touches an EMPTY square,
+//      and the size of the block of land/water is not already larger than
+//      |target|.
+//
+// If VARIABLE is passed in as the |target| parameter, the function will only
+// return true in the latter case.
+//
+// The function marks all visited squares in the block of land/water in the
+// |checked| array of size NUMBER_OF_SQUARES.
 bool can_match_group_size(const Board* const board,
                           const State* const state_type,
                           int square,
