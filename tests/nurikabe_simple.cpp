@@ -100,7 +100,6 @@ bool can_match_group_size(const Board* const board,
   int queue[NUMBER_OF_SQUARES];
   int length_of_queue = 0;
   int processed = 0;
-  int counter = 0;
 
   queue[length_of_queue++] = square;
   checked[square] = true;
@@ -122,7 +121,7 @@ bool can_match_group_size(const Board* const board,
           }
           queue[length_of_queue++] = next_square;
           checked[next_square] = true;
-          if (counter > target) {
+          if (length_of_queue > target) {
             return false;
           }
         } else if (board->get_value(next_square) == EMPTY) {
