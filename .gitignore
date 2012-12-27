@@ -3,6 +3,7 @@
 
 # Executables from test/
 example
+nurikabe_simple
 thermometers_simple
 
 # Executables from test/mystery_hunt/
