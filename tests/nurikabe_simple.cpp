@@ -104,7 +104,6 @@ bool can_match_group_size(const Board* const board,
 
   queue[length_of_queue++] = square;
   checked[square] = true;
-  counter++;
 
   bool tentative_accept = false;
   while (processed < length_of_queue) {
@@ -123,7 +122,6 @@ bool can_match_group_size(const Board* const board,
           }
           queue[length_of_queue++] = next_square;
           checked[next_square] = true;
-          counter++;
           if (counter > target) {
             return false;
           }
@@ -138,7 +136,7 @@ bool can_match_group_size(const Board* const board,
     return true;
   }
 
-  return (counter == target);
+  return (length_of_queue == target);
 }
 
 bool validator(const Board* const board) {
