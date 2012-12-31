@@ -21,7 +21,30 @@
 CXX := g++
 CXX_FLAGS := -Wall -I./
 
+ifeq ($(NDEBUG), 1)
+  CXX_FLAGS += -O3 -DNDEBUG
+else
+  CXX_FLAGS += -O0 -g
+endif
+
+# ------------------------------------------------------------------------------
+# Brute Force Searcher - Library Files.
+# ------------------------------------------------------------------------------
+
+BOARD_SOURCE := include/brute_force_solver/board.cpp
+BOARD_OBJECT := board.o
+
+STATE_SOURCE := include/brute_force_solver/state.cpp
+STATE_OBJECT := state.o
+
+STATE_LIST_SOURCE := include/brute_force_solver/state_list.cpp
+STATE_LIST_OBJECT := state_list.o
+
 LIB_OBJECTS := board.o state.o state_list.o
+
+# ------------------------------------------------------------------------------
+# Tests.
+# ------------------------------------------------------------------------------
 
 EXAMPLE_EXECUTABLE := example
 EXAMPLE_SOURCE := tests/example.cpp
@@ -53,26 +76,20 @@ ALL_EXECUTABLES := \
       $(NURIKABE_EXECUTABLE) \
       $(THERMOMETERS_EXECUTABLE)
 
-ifeq ($(NDEBUG), 1)
-  CXX_FLAGS += -O3 -DNDEBUG
-else
-  CXX_FLAGS += -O0 -g
-endif
-
 all: $(ALL_EXECUTABLES) 
 
 # ------------------------------------------------------------------------------
-# Library source files.
+# Brute Force Solver - Library source files.
 # ------------------------------------------------------------------------------
 
-board.o: include/brute_force_solver/board.cpp
-	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/board.cpp
+$(BOARD_OBJECT): $(BOARD_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(BOARD_SOURCE)
 
-state.o: include/brute_force_solver/state.cpp
-	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/state.cpp
+$(STATE_OBJECT): $(STATE_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(STATE_SOURCE)
 
-state_list.o: include/brute_force_solver/state_list.cpp
-	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/state_list.cpp
+$(STATE_LIST_OBJECT): $(STATE_LIST_SOURCE)
+	$(CXX) $(CXX_FLAGS) -c $(STATE_LIST_SOURCE)
 
 # ------------------------------------------------------------------------------
 # Test files.
