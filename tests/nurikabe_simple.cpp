@@ -92,41 +92,54 @@ bool can_match_group_size(const Board* const board,
                           int square,
                           int target,
                           bool* checked) {
-  if (board->get_value(square) != state_type &&
-      board->get_value(square) != EMPTY) {
+  // Accept if the square is empty.
+  if (board->get_value(square) == EMPTY) {
+    return true;
+  }
+
+  // Reject if the square is of the wrong type.
+  if (board->get_value(square) != state_type) {
     return false;
   }
 
+  // We use BFS for flood-fill.
   int queue[NUMBER_OF_SQUARES];
   int length_of_queue = 0;
   int processed = 0;
 
+  // Add the original square to the queue.
   queue[length_of_queue++] = square;
   checked[square] = true;
 
+  // Whether we have hit an EMPTY square.
   bool tentative_accept = false;
   while (processed < length_of_queue) {
+    // Go through all four adjacent squares.
     for (int i = 0; i < NUMBER_OF_DIRECTIONS; i++) {
       int next_row = row_of_square(queue[processed]) + delta_x[i];
       int next_column = column_of_square(queue[processed]) + delta_y[i];
 
-      if (0 <= next_row && next_row < NUMBER_OF_ROWS &&
-          0 <= next_column && next_column < NUMBER_OF_COLUMNS) {
-        int next_square = row_and_column_to_square(next_row, next_column);
+      // Ignore this square if we fall off the board.
+      if (!(0 <= next_row && next_row < NUMBER_OF_ROWS &&
+            0 <= next_column && next_column < NUMBER_OF_COLUMNS)) {
+        continue;
+      }
 
-        if (board->get_value(next_square) == state_type) {
-          if (checked[next_square]) {
-            // We've already processed this.
-            continue;
-          }
-          queue[length_of_queue++] = next_square;
-          checked[next_square] = true;
-          if (length_of_queue > target) {
-            return false;
-          }
-        } else if (board->get_value(next_square) == EMPTY) {
-          tentative_accept = true;
+      // Process this square.
+      int next_square = row_and_column_to_square(next_row, next_column);
+
+      if (board->get_value(next_square) == state_type) {
+        if (checked[next_square]) {
+          // We've already processed this.
+          continue;
         }
+        queue[length_of_queue++] = next_square;
+        checked[next_square] = true;
+        if (length_of_queue > target) {
+          return false;
+        }
+      } else if (board->get_value(next_square) == EMPTY) {
+        tentative_accept = true;
       }
     }
     processed++;

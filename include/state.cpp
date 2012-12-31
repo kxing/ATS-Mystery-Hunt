@@ -22,7 +22,7 @@
 
 #include <string.h>
 
-const State EMPTY_STATE("empty");
+const State EMPTY_STATE("?");
 const State* EMPTY = &EMPTY_STATE;
 
 State::State(const char* pretty_print_string) :
