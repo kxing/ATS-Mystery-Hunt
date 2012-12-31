@@ -48,7 +48,7 @@
 #ifndef _BRAILLE_BOARD_H_
 #define _BRAILLE_BOARD_H_
 
-#include "include/state_list.h"
+#include "include/brute_force_solver/state_list.h"
 
 #define NUMBER_OF_ROWS 5
 #define NUMBER_OF_COLUMNS 5

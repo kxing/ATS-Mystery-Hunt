@@ -18,24 +18,28 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#include "include/state.h"
+#include "include/brute_force_solver/state_list.h"
 
-#include <string.h>
+#include "include/brute_force_solver/state.h"
 
-const State EMPTY_STATE("?");
-const State* EMPTY = &EMPTY_STATE;
-
-State::State(const char* pretty_print_string) :
-    pretty_print_string(string_copy(pretty_print_string)) {
+StateList::StateList(const State* const * const states, int number_of_states) :
+    states(states), number_of_states(number_of_states) {
 }
 
-State::~State() {
-  delete[] pretty_print_string;
+StateList::~StateList() {
 }
 
-// static
-const char* State::string_copy(const char* string) {
-  char* new_string = new char[strlen(string) + 1];
-  strcpy(new_string, string);
-  return new_string;
+#ifndef NDEBUG
+bool StateList::is_valid_state(const State* const state) const {
+  if (state == EMPTY) {
+    return true;
+  }
+
+  for (int i = 0; i < number_of_states; i++) {
+    if (states[i] == state) {
+      return true;
+    }
+  }
+  return false;
 }
+#endif

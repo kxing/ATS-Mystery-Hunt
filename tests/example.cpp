@@ -35,9 +35,9 @@
 
 #include <stdio.h>
 
-#include "include/board.h"
-#include "include/state.h"
-#include "include/state_list.h"
+#include "include/brute_force_solver/board.h"
+#include "include/brute_force_solver/state.h"
+#include "include/brute_force_solver/state_list.h"
 
 const int NUMBER_OF_SQUARES = 5;
 const int NUMBER_OF_STATES = 3;

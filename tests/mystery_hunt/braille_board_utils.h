@@ -21,7 +21,7 @@
 #ifndef _BRAILLE_BOARD_UTILS_
 #define _BRAILLE_BOARD_UTILS_
 
-#include "include/board.h"
+#include "include/brute_force_solver/board.h"
 #include "tests/mystery_hunt/braille_board.h"
 
 static SmallSquareType get_small_square_type(const Board* const board, int index) {

@@ -20,7 +20,7 @@
 
 #include "tests/mystery_hunt/braille_board.h"
 
-#include "include/state.h"
+#include "include/brute_force_solver/state.h"
 
 static State* ALL_STATES[NUMBER_OF_STATES];
 const StateList STATE_LIST(ALL_STATES, NUMBER_OF_STATES);

@@ -65,14 +65,14 @@ all: $(ALL_EXECUTABLES)
 # Library source files.
 # ------------------------------------------------------------------------------
 
-board.o: include/board.cpp
-	$(CXX) $(CXX_FLAGS) -c include/board.cpp
+board.o: include/brute_force_solver/board.cpp
+	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/board.cpp
 
-state.o: include/state.cpp
-	$(CXX) $(CXX_FLAGS) -c include/state.cpp
+state.o: include/brute_force_solver/state.cpp
+	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/state.cpp
 
-state_list.o: include/state_list.cpp
-	$(CXX) $(CXX_FLAGS) -c include/state_list.cpp
+state_list.o: include/brute_force_solver/state_list.cpp
+	$(CXX) $(CXX_FLAGS) -c include/brute_force_solver/state_list.cpp
 
 # ------------------------------------------------------------------------------
 # Test files.

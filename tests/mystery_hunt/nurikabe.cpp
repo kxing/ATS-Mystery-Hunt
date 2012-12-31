@@ -36,9 +36,9 @@
 #include <string.h>
 #include <time.h>
 
-#include "include/board.h"
-#include "include/state.h"
-#include "include/state_list.h"
+#include "include/brute_force_solver/board.h"
+#include "include/brute_force_solver/state.h"
+#include "include/brute_force_solver/state_list.h"
 
 #include "tests/mystery_hunt/braille_board.h"
 #include "tests/mystery_hunt/braille_board_utils.h"
