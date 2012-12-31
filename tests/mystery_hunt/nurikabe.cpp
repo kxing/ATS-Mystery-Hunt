@@ -34,16 +34,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "include/brute_force_solver/board.h"
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+#include "include/stopwatch/stopwatch.h"
+
 #include "tests/mystery_hunt/braille_board.h"
 #include "tests/mystery_hunt/braille_board_utils.h"
 
 using lib_kxing::brute_force_solver::Board;
+using lib_kxing::stopwatch::StopWatch;
 
 const int NUMBER_OF_DIRECTIONS = 4;
 const int delta_x[NUMBER_OF_DIRECTIONS] = {1, 0, -1, 0};
@@ -298,7 +300,9 @@ bool validator(const Board* const board) {
 }
 
 int main() {
-  clock_t start = clock();
+  StopWatch watch;
+  watch.start();
+
   create_all_states();
   int search_order[NUMBER_OF_SQUARES] = {
     0, 1, 5, 10, 6, 17, 12, 11, 7, 2, 3, 4, 8, 9, 13, 14, 18, 19,
@@ -317,8 +321,8 @@ int main() {
     delete solution;
   }
   delete_all_states();
-  clock_t end = clock();
 
-  printf("Time taken: %f seconds.\n", (float)(end - start) / CLOCKS_PER_SEC);
+  watch.stop();
+  watch.print_elapsed_time();
   return 0;
 }

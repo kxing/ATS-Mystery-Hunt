@@ -39,10 +39,13 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+#include "include/stopwatch/stopwatch.h"
+
 #include "tests/mystery_hunt/braille_board.h"
 #include "tests/mystery_hunt/braille_board_utils.h"
 
 using lib_kxing::brute_force_solver::Board;
+using lib_kxing::stopwatch::StopWatch;
 
 // Checks to see if the number of filled squares in [start, end] (with step
 // size |step| can ever equal |target|.
@@ -293,7 +296,9 @@ bool validator(const Board* const board) {
 }
 
 int main() {
-  clock_t start = clock();
+  StopWatch watch;
+  watch.start();
+
   create_all_states();
   int search_order[NUMBER_OF_SQUARES] = {
     10, 11, 12, 13, 14,
@@ -319,8 +324,8 @@ int main() {
     delete solution;
   }
   delete_all_states();
-  clock_t end = clock();
 
-  printf("Time taken: %f seconds.\n", (float)(end - start) / CLOCKS_PER_SEC);
+  watch.stop();
+  watch.print_elapsed_time();
   return 0;
 }
