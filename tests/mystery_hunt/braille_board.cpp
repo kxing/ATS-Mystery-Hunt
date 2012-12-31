@@ -22,6 +22,9 @@
 
 #include "include/brute_force_solver/state.h"
 
+using lib_kxing::brute_force_solver::State;
+using lib_kxing::brute_force_solver::StateList;
+
 static State* ALL_STATES[NUMBER_OF_STATES];
 const StateList STATE_LIST(ALL_STATES, NUMBER_OF_STATES);
 

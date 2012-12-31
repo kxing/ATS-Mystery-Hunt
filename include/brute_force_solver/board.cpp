@@ -27,6 +27,9 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
 Board::Board(const int number_of_squares,
              const StateList* state_list,
              const int* const search_order,
@@ -130,3 +133,6 @@ bool Board::find_solution_internal(int index) {
   set_value(search_order[index], EMPTY);
   return false;
 }
+
+}  // namespace brute_force_solver
+}  // namespace lib_kxing

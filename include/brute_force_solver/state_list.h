@@ -21,6 +21,9 @@
 #ifndef _STATE_LIST_H_
 #define _STATE_LIST_H_
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
 class State;
 
 class StateList {
@@ -44,5 +47,8 @@ class StateList {
   const State* const * const states;
   int number_of_states;
 };
+
+}  // namespace brute_force_solver
+}  // namespace lib_kxing
 
 #endif  // _STATE_LIST_H_

@@ -22,6 +22,9 @@
 
 #include "include/brute_force_solver/state.h"
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
 StateList::StateList(const State* const * const states, int number_of_states) :
     states(states), number_of_states(number_of_states) {
 }
@@ -42,4 +45,8 @@ bool StateList::is_valid_state(const State* const state) const {
   }
   return false;
 }
+
 #endif
+
+}  // namespace brute_force_solver
+}  // namespace lib_kxing

@@ -26,6 +26,9 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
 class Board;
 
 typedef const State* Square;
@@ -94,5 +97,8 @@ class Board {
   }
   #endif
 };
+
+}  // namespace brute_force_solver
+}  // namespace lib_kxing
 
 #endif  // _BOARD_H_

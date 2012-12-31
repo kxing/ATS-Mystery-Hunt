@@ -39,6 +39,12 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+using lib_kxing::brute_force_solver::Board;
+using lib_kxing::brute_force_solver::State;
+using lib_kxing::brute_force_solver::StateList;
+
+using lib_kxing::brute_force_solver::EMPTY;
+
 const int NUMBER_OF_ROWS = 5;
 const int NUMBER_OF_COLUMNS = 5;
 const int NUMBER_OF_SQUARES = NUMBER_OF_ROWS * NUMBER_OF_COLUMNS;

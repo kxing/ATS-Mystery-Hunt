@@ -21,6 +21,13 @@
 #ifndef _STATE_H_
 #define _STATE_H_
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
+class State;
+
+extern const State* EMPTY;
+
 class State {
  public:
   State(const char* pretty_print_string);
@@ -36,6 +43,7 @@ class State {
   static const char* string_copy(const char* string);
 };
 
-extern const State* EMPTY;
+}  // namespace brute_force_solver
+}  // namespace lib_kxing
 
 #endif  // _STATE_H_

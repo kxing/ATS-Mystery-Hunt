@@ -43,6 +43,8 @@
 #include "tests/mystery_hunt/braille_board.h"
 #include "tests/mystery_hunt/braille_board_utils.h"
 
+using lib_kxing::brute_force_solver::Board;
+
 const int NUMBER_OF_DIRECTIONS = 4;
 const int delta_x[NUMBER_OF_DIRECTIONS] = {1, 0, -1, 0};
 const int delta_y[NUMBER_OF_DIRECTIONS] = {0, 1, 0, -1};

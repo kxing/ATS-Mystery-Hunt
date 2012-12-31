@@ -59,7 +59,7 @@
 
 #define NUMBER_OF_STATES 26
 
-extern const StateList STATE_LIST;
+extern const lib_kxing::brute_force_solver::StateList STATE_LIST;
 
 void create_all_states();
 void delete_all_states();

@@ -42,6 +42,8 @@
 #include "tests/mystery_hunt/braille_board.h"
 #include "tests/mystery_hunt/braille_board_utils.h"
 
+using lib_kxing::brute_force_solver::Board;
+
 // Checks to see if the number of filled squares in [start, end] (with step
 // size |step| can ever equal |target|.
 bool valid_line(const Board* const board,

@@ -22,6 +22,9 @@
 
 #include <string.h>
 
+namespace lib_kxing {
+namespace brute_force_solver {
+
 const State EMPTY_STATE("?");
 const State* EMPTY = &EMPTY_STATE;
 
@@ -39,3 +42,6 @@ const char* State::string_copy(const char* string) {
   strcpy(new_string, string);
   return new_string;
 }
+
+}  // namespace brute_force_solver
+}  // namespace lib_kxing

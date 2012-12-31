@@ -24,7 +24,8 @@
 #include "include/brute_force_solver/board.h"
 #include "tests/mystery_hunt/braille_board.h"
 
-static SmallSquareType get_small_square_type(const Board* const board, int index) {
+static SmallSquareType get_small_square_type(
+    const lib_kxing::brute_force_solver::Board* const board, int index) {
   int big_row =
       (index / (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) / BRAILLE_ROWS;
   int big_column =
@@ -34,8 +35,9 @@ static SmallSquareType get_small_square_type(const Board* const board, int index
   int small_column = 
       (index % (NUMBER_OF_COLUMNS * BRAILLE_COLUMNS)) % BRAILLE_COLUMNS;
 
-  const State* state = board->get_value(big_row * NUMBER_OF_COLUMNS + big_column);
-  if (state == EMPTY) {
+  const lib_kxing::brute_force_solver::State* state =
+      board->get_value(big_row * NUMBER_OF_COLUMNS + big_column);
+  if (state == lib_kxing::brute_force_solver::EMPTY) {
     return SMALL_EMPTY;
   }
   
