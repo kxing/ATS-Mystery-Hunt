@@ -39,9 +39,13 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+#include "include/stopwatch/stopwatch.h"
+
 using lib_kxing::brute_force_solver::Board;
 using lib_kxing::brute_force_solver::State;
 using lib_kxing::brute_force_solver::StateList;
+
+using lib_kxing::stopwatch::StopWatch;
 
 const int NUMBER_OF_SQUARES = 5;
 const int NUMBER_OF_STATES = 3;
@@ -103,7 +107,7 @@ bool validator(const Board* const board) {
   return true;
 }
 
-int main() {
+void solve() {
   int search_order[NUMBER_OF_SQUARES] = {2 - 1, 1 - 1, 4 - 1, 3 - 1, 5 - 1};
 
   Board board(NUMBER_OF_SQUARES, &STATE_LIST, search_order, &validator);
@@ -117,5 +121,9 @@ int main() {
     solution->pretty_print();
     delete solution;
   }
+}
+
+int main() {
+  StopWatch::time_function(&solve);
   return 0;
 }

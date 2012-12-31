@@ -37,11 +37,15 @@
 #include "include/brute_force_solver/state.h"
 #include "include/brute_force_solver/state_list.h"
 
+#include "include/stopwatch/stopwatch.h"
+
 using lib_kxing::brute_force_solver::Board;
 using lib_kxing::brute_force_solver::State;
 using lib_kxing::brute_force_solver::StateList;
 
 using lib_kxing::brute_force_solver::EMPTY;
+
+using lib_kxing::stopwatch::StopWatch;
 
 const int NUMBER_OF_ROWS = 4;
 const int NUMBER_OF_COLUMNS = 4;
@@ -175,7 +179,7 @@ bool validator(const Board* const board) {
   return true;
 }
 
-int main() {
+void solve() {
   int search_order[NUMBER_OF_SQUARES] = {
       0, 1, 2, 3, 12, 8, 4, 10, 9, 11, 15, 7, 6, 5, 14, 13,
   };
@@ -191,5 +195,9 @@ int main() {
     solution->pretty_print(4);
     delete solution;
   }
+}
+
+int main() {
+  StopWatch::time_function(&solve);
   return 0;
 }
