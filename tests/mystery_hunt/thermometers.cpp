@@ -295,10 +295,7 @@ bool validator(const Board* const board) {
   return true;
 }
 
-int main() {
-  StopWatch watch;
-  watch.start();
-
+void solve() {
   create_all_states();
   int search_order[NUMBER_OF_SQUARES] = {
     10, 11, 12, 13, 14,
@@ -324,8 +321,9 @@ int main() {
     delete solution;
   }
   delete_all_states();
+}
 
-  watch.stop();
-  watch.print_elapsed_time();
+int main() {
+  StopWatch::time_function(&solve);
   return 0;
 }

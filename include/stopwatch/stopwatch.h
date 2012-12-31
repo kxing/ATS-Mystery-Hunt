@@ -35,6 +35,9 @@ class StopWatch {
   void stop();
   void print_elapsed_time();
 
+  // Prints out the time it takes to run the given function.
+  static void time_function(void (*function)());
+
  private:
   bool running;
   bool can_print;

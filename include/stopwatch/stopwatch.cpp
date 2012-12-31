@@ -68,5 +68,14 @@ void StopWatch::print_elapsed_time() {
   printf("Elapsed time: %lld.%09lld seconds\n", seconds, nanoseconds);
 }
 
+// static
+void StopWatch::time_function(void (*function)()) {
+  StopWatch watch;
+  watch.start();
+  function();
+  watch.stop();
+  watch.print_elapsed_time();
+}
+
 }  // namespace stopwatch
 }  // namespace lib_kxing
