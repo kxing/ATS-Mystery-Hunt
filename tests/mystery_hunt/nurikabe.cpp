@@ -267,11 +267,14 @@ bool validator(const Board* const board) {
   // The no-lakes rule.
   for (int i = 1; i < NUMBER_OF_ROWS * BRAILLE_ROWS; i++) {
     for (int j = 1; j < NUMBER_OF_COLUMNS * BRAILLE_COLUMNS; j++) {
-      if (get_small_square_type(board, row_and_column_to_square(i, j)) == SMALL_FILLED &&
-          get_small_square_type(board, row_and_column_to_square(i - 1, j)) == SMALL_FILLED &&
-          get_small_square_type(board, row_and_column_to_square(i, j - 1)) == SMALL_FILLED &&
-          get_small_square_type(board, row_and_column_to_square(i - 1, j - 1)) ==
-              SMALL_FILLED) {
+      if (get_small_square_type(
+              board, row_and_column_to_square(i, j)) == SMALL_FILLED &&
+          get_small_square_type(
+              board, row_and_column_to_square(i - 1, j)) == SMALL_FILLED &&
+          get_small_square_type(
+              board, row_and_column_to_square(i, j - 1)) == SMALL_FILLED &&
+          get_small_square_type(
+              board, row_and_column_to_square(i - 1, j - 1)) == SMALL_FILLED) {
         return false;
       }
     }
@@ -283,8 +286,10 @@ bool validator(const Board* const board) {
         !can_match_group_size(board,
                               SMALL_FILLED,
                               i,
-                              NUMBER_OF_SQUARES * BRAILLE_ROWS * BRAILLE_COLUMNS -
-                                (3 + 9 + 6 + 2 + 5 + 4 + 8 + 1 + 2 + 4 + 3 + 4 + 9 + 9),
+                              NUMBER_OF_SQUARES * BRAILLE_ROWS *
+                                BRAILLE_COLUMNS -
+                                (3 + 9 + 6 + 2 + 5 + 4 + 8 + 1 +
+                                 2 + 4 + 3 + 4 + 9 + 9),
                               checked)) {
       return false;
     }
